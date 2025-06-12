@@ -4,6 +4,21 @@ public class Practise {
 		
 
 		System.out.println("This is to check the GIT code");
+
+		System.out.println("This is to check the GIT code");
+
+		System.out.println("This is to check the GIT code");
+
+		System.out.println("This is to check the GIT code");
+
+		System.out.println("This is to check the GIT code");
+
+		System.out.println("This is to check the GIT code");
+
+		System.out.println("This is to check the GIT code");
+
+		System.out.println("This is to check the GIT code");
+
 		
 		
 	}

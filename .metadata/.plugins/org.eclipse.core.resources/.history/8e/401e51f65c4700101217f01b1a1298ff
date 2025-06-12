@@ -1,0 +1,130 @@
+package stepDefinition;
+
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class stepDefinitionScenarios {
+
+	static WebDriver driver;
+	
+	//below given file scenario is under background, which will execute first
+	//after given what are the methods we have build those will execute first
+
+	@Given("I landed on Ecommerce Page")
+	public void i_landed_on_ecommerce_page() throws InterruptedException {
+		driver = new ChromeDriver();
+		driver.get("https://rahulshettyacademy.com/locatorspractice/");
+		driver.manage().window().maximize();
+		System.out.println(driver.getTitle());
+		Thread.sleep(2000);
+	}
+	
+	//we have mentioned name and password in feature file
+	//but in in actual code we use (.+) to send the value from the feature file, what ever it is
+	//at starting we use ^ and end with $ to represent that it is regular expression
+	@Given("^Logged in with Username and Password$")
+	public void Logged_in_with_Username_and_Password() throws InterruptedException
+	{
+			driver.findElement(By.id("inputUsername")).sendKeys("Manoj");;
+			driver.findElement(By.xpath("//input[@name='inputPassword']")).sendKeys("rahulshettyacademy.");
+			driver.findElement(By.xpath("//button[@class='submit signInBtn']")).click();
+			System.out.println(driver.getTitle());
+			
+	}
+	
+	@When("^I added product to the cart$")
+
+	public void When_I_added_product_to_the_cart() throws InterruptedException
+	{
+		/*
+		driver.get("https://rahulshettyacademy.com/angularpractice/");
+		System.out.println(driver.getTitle());
+		driver.findElement(By.className("nav-link")).click(); //click on shop url
+		System.out.println(driver.getTitle());	*/
+		
+		driver.get("https://www.google.com/");
+		List<WebElement> options = driver.findElements(By.xpath("(//textarea[@id='APjFqb'])[1]"));
+		
+		for(WebElement option: options)
+		{
+			if(option.getText().equalsIgnoreCase("rahul shetty login page"))
+					{
+				option.click();
+				break;
+					}
+		}
+		
+		//.sendKeys("rahul shetty login page");
+		
+		driver.findElement(By.xpath("//h3[contains(text(),\"Let's Shop\")]")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("userEmail")).sendKeys("dihamoj266@gotemv.com");
+		driver.findElement(By.id("userPassword")).sendKeys("M@noj998504");
+		driver.findElement(By.id("login")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("(//button[@class='btn w-10 rounded'][normalize-space()='Add To Cart'])[1]")).click();
+		driver.findElement(By.xpath("//button[@routerlink='/dashboard/cart']")).click();
+
+	}
+	
+    @And ("^Checkout and submit the order$")
+    
+    public void And_Checkout_and_submit_the_order() throws InterruptedException
+    {
+    	System.out.println(driver.getTitle());
+		Thread.sleep(2000);
+		boolean name = driver.findElement(By.xpath("div[class='cartSection'] h3")).isDisplayed();
+		//Assert.assertEquals(ProductName, name);
+		System.out.println(name);	
+		driver.findElement(By.xpath("//button[contains(text(),'Checkout')")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[contains(@placeholder, 'Select Country')]")).sendKeys("India");
+		try {
+			driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
+		} catch (Exception e) {	
+		
+		}
+		finally {
+			driver.findElement(By.xpath("//a[contains(@class,'btnn action__submit ng-star-inserted')]")).click();
+		}
+
+		Thread.sleep(2000);
+
+    }
+
+    @Then ("^message id displayed in confirmation page$")
+    public void message_id_displayed_in_confirmation_page()
+    {
+    	
+    	Boolean string1 =  driver.findElement(By.cssSelector(".hero-primary")).isDisplayed();
+    	//Assert.assertEquals(string, string1);
+		//System.out.println(string);
+		System.out.println(string1);
+
+		
+    }
+
+    /*
+    public static void main(String[] args) {
+		
+    	stepDefinitionScenarios sd = new stepDefinitionScenarios();
+    	sd.I_landed_on_Ecommerce_Page();
+    	sd.Logged_in_with_Username_and_Password();
+    	sd.When_I_added_product_to_the_cart();
+    	sd.And_Checkout_and_submit_the_order();
+    	sd.message_id_displayed_in_confirmation_page();
+    	
+	}
+	*/
+	
+}

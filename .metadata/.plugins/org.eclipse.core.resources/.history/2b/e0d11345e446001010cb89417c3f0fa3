@@ -1,0 +1,18 @@
+package CucumberFeatureFile;
+
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+
+//cucumber options tag is used to execute the feature files
+//features will have the path of the feature file package
+//glue will have step definition path package name
+//monochrome will results in readable format and we use plugin to get the report
+//as we are using assertions and other things of testng code, cucumber given one class name AbstractTestNGCucumberTests
+//if we are are not using testng no need of extends the testng class and run by JUnit
+
+
+@CucumberOptions(features = "Cucumber/CucumberFeatureFile", glue = "Cucumber/stepDefinition"
+,monochrome = true,plugin= {"pretty", "html:target/cucumber-reports"})
+public class TestNGTestRunner extends AbstractTestNGCucumberTests{
+
+}

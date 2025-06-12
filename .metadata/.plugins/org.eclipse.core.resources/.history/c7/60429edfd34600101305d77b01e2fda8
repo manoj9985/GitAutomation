@@ -1,0 +1,29 @@
+package stepDefinition;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.en.Given;
+
+public class stepDefinitionScenarios {
+
+	//below given file scenario is under background, which will execute first
+	//after given what are the methods we have build those will execute first
+	@Given("I landed on Ecommerce Page")
+	public void I_landed_on_Ecommerce_Page()
+	{
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+		driver.manage().window().maximize();
+		System.out.println(driver.getTitle());
+	}
+	
+	//we have mentioned name and password in feature file
+	//but in in actual code we use (.+) to send the value from the feature file, what ever it is
+	@Given("^Logged in with Username (.+) and Password (.+)$")
+	public void Logged_in_with_Username <name> and Password <password>()
+	{
+		
+	}
+
+}
